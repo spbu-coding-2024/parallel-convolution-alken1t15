@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+<rect width="900" height="520" fill="#ffffff"/>
+<text x="40" y="42" font-family="Arial" font-size="24" font-weight="700" fill="#222">2048.jpg, gaussian5: strategy comparison</text>
+<line x1="85" y1="420" x2="785" y2="420" stroke="#333"/>
+<line x1="85" y1="80" x2="85" y2="420" stroke="#333"/>
+<line x1="85" y1="80" x2="85" y2="420" stroke="#ddd"/>
+<text x="85" y="442" text-anchor="middle" font-family="Arial" font-size="13" fill="#444">1</text>
+<line x1="318.333" y1="80" x2="318.333" y2="420" stroke="#ddd"/>
+<text x="318.333" y="442" text-anchor="middle" font-family="Arial" font-size="13" fill="#444">2</text>
+<line x1="551.667" y1="80" x2="551.667" y2="420" stroke="#ddd"/>
+<text x="551.667" y="442" text-anchor="middle" font-family="Arial" font-size="13" fill="#444">4</text>
+<line x1="785" y1="80" x2="785" y2="420" stroke="#ddd"/>
+<text x="785" y="442" text-anchor="middle" font-family="Arial" font-size="13" fill="#444">8</text>
+<line x1="85" y1="420" x2="785" y2="420" stroke="#eee"/>
+<text x="77" y="424" text-anchor="end" font-family="Arial" font-size="12" fill="#666">0</text>
+<line x1="85" y1="335" x2="785" y2="335" stroke="#eee"/>
+<text x="77" y="339" text-anchor="end" font-family="Arial" font-size="12" fill="#666">426.232</text>
+<line x1="85" y1="250" x2="785" y2="250" stroke="#eee"/>
+<text x="77" y="254" text-anchor="end" font-family="Arial" font-size="12" fill="#666">852.464</text>
+<line x1="85" y1="165" x2="785" y2="165" stroke="#eee"/>
+<text x="77" y="169" text-anchor="end" font-family="Arial" font-size="12" fill="#666">1278.696</text>
+<line x1="85" y1="80" x2="785" y2="80" stroke="#eee"/>
+<text x="77" y="84" text-anchor="end" font-family="Arial" font-size="12" fill="#666">1704.928</text>
+<path d="M 85 116.429 L 318.333 246.914 L 551.667 296.705 L 785 334.903" fill="none" stroke="#2f80ed" stroke-width="3"/>
+<circle cx="85" cy="116.429" r="4" fill="#2f80ed"/>
+<circle cx="318.333" cy="246.914" r="4" fill="#2f80ed"/>
+<circle cx="551.667" cy="296.705" r="4" fill="#2f80ed"/>
+<circle cx="785" cy="334.903" r="4" fill="#2f80ed"/>
+<path d="M 85 139.257 L 318.333 247.382 L 551.667 312.185 L 785 338.934" fill="none" stroke="#27ae60" stroke-width="3"/>
+<circle cx="85" cy="139.257" r="4" fill="#27ae60"/>
+<circle cx="318.333" cy="247.382" r="4" fill="#27ae60"/>
+<circle cx="551.667" cy="312.185" r="4" fill="#27ae60"/>
+<circle cx="785" cy="338.934" r="4" fill="#27ae60"/>
+<path d="M 85 136.733 L 318.333 253.82 L 551.667 317.466 L 785 287.813" fill="none" stroke="#f2994a" stroke-width="3"/>
+<circle cx="85" cy="136.733" r="4" fill="#f2994a"/>
+<circle cx="318.333" cy="253.82" r="4" fill="#f2994a"/>
+<circle cx="551.667" cy="317.466" r="4" fill="#f2994a"/>
+<circle cx="785" cy="287.813" r="4" fill="#f2994a"/>
+<path d="M 85 126.071 L 318.333 235.158 L 551.667 313.071 L 785 349.02" fill="none" stroke="#eb5757" stroke-width="3"/>
+<circle cx="85" cy="126.071" r="4" fill="#eb5757"/>
+<circle cx="318.333" cy="235.158" r="4" fill="#eb5757"/>
+<circle cx="551.667" cy="313.071" r="4" fill="#eb5757"/>
+<circle cx="785" cy="349.02" r="4" fill="#eb5757"/>
+<line x1="805" y1="92" x2="835" y2="92" stroke="#2f80ed" stroke-width="3"/><text x="842" y="96" font-family="Arial" font-size="13" fill="#333">pixels</text>
+<line x1="805" y1="116" x2="835" y2="116" stroke="#27ae60" stroke-width="3"/><text x="842" y="120" font-family="Arial" font-size="13" fill="#333">rows</text>
+<line x1="805" y1="140" x2="835" y2="140" stroke="#f2994a" stroke-width="3"/><text x="842" y="144" font-family="Arial" font-size="13" fill="#333">columns</text>
+<line x1="805" y1="164" x2="835" y2="164" stroke="#eb5757" stroke-width="3"/><text x="842" y="168" font-family="Arial" font-size="13" fill="#333">grid</text>
+<text x="735" y="465" font-family="Arial" font-size="13" fill="#555">threads</text>
+<text x="32" y="105" transform="rotate(-90 32 105)" font-family="Arial" font-size="13" fill="#555">ms</text>
+</svg>

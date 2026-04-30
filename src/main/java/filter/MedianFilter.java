@@ -4,7 +4,8 @@ import image.ColorImage;
 
 public class MedianFilter {
     public static ColorImage apply(ColorImage src, int windowSize) {
-        // Я принимаю только положительное нечётное окно, потому что у median filter должен быть центр.
+        // Проверяю, что размер окна корректный:
+        // для median filter беру только положительное и нечётное окно
         if (windowSize <= 0 || windowSize % 2 == 0) {
             throw new IllegalArgumentException("Median window size must be positive and odd");
         }
@@ -12,20 +13,24 @@ public class MedianFilter {
         int width = src.width;
         int height = src.height;
 
-        // Результат пишу в новый массив, чтобы не портить исходные пиксели во время расчёта соседей.
+        // Сюда буду записывать результат после применения фильтра
         byte[] dst = new byte[src.data.length];
 
-        // По радиусу я понимаю, сколько соседей брать в каждую сторону от текущего пикселя.
+        // Считаю радиус окна вокруг текущего пикселя.
+        // Например, для 3x3 radius = 1, для 5x5 radius = 2.
         int radius = windowSize / 2;
 
-        // В этом массиве я собираю значения одного канала внутри окна и затем беру медиану.
+        // В этот массив собираю все значения пикселей из окна,
+        // чтобы потом отсортировать их и взять медиану
         int[] window = new int[windowSize * windowSize];
 
-        // Я обрабатываю каждый пиксель и каждый цветовой канал независимо.
+        // Прохожу по всем пикселям исходного изображения
         for (int y = 0; y < height; y++) {
             int dstRowOffset = y * width;
 
             for (int x = 0; x < width; x++) {
+                // Считаю медиану через общий метод, чтобы параллельная версия
+                // не дублировала правила обработки границ.
                 int dstOffset = (dstRowOffset + x) * ColorImage.CHANNELS;
                 for (int channel = 0; channel < ColorImage.CHANNELS; channel++) {
                     int median = computePixel(src, x, y, channel, radius, window);
@@ -40,9 +45,9 @@ public class MedianFilter {
     public static int computePixel(ColorImage src, int x, int y, int channel, int radius, int[] window) {
         int idx = 0;
 
-        // Я собираю все значения выбранного канала из окна вокруг текущей точки.
+        // Собираю все пиксели из окна вокруг текущей точки (x, y).
         for (int dy = -radius; dy <= radius; dy++) {
-            // Для median filter я прижимаю координаты к краю изображения.
+            // Если выходим за границы, прижимаю координату к ближайшей границе изображения.
             int sy = clamp(y + dy, 0, src.height - 1);
 
             for (int dx = -radius; dx <= radius; dx++) {
@@ -54,7 +59,7 @@ public class MedianFilter {
 
         java.util.Arrays.sort(window);
 
-        // После сортировки я беру центральный элемент: это и есть медиана.
+        // После сортировки беру центральный элемент: это и есть медиана.
         return window[window.length / 2];
     }
 

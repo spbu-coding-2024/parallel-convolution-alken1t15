@@ -1,7 +1,6 @@
 package image;
 
 public class ColorImage {
-    // Я храню цвет как три канала на пиксель: R, G, B.
     public static final int CHANNELS = 3;
 
     public final int width;
@@ -9,7 +8,8 @@ public class ColorImage {
     public final byte[] data;
 
     public ColorImage(int width, int height, byte[] data) {
-        // Я сразу проверяю входные данные, чтобы дальше фильтры работали только с корректным изображением.
+        // Я храню цветное изображение в плоском массиве RGB:
+        // для каждого пикселя подряд идут R, G и B.
         if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException("Image size must be positive");
         }
@@ -22,7 +22,7 @@ public class ColorImage {
     }
 
     public static int offset(int width, int x, int y) {
-        // Я перевожу координаты пикселя в позицию первого канала R внутри одномерного массива.
+        // Перевожу координаты пикселя в индекс первого канала R.
         return (y * width + x) * CHANNELS;
     }
 }
