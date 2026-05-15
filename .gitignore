@@ -38,3 +38,5 @@ build/
 .DS_Store
 /.mvn/
 /.idea/
+/.task2-source/
+/task.docx

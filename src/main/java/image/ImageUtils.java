@@ -6,9 +6,13 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Locale;
+import java.util.Set;
 
 public class ImageUtils {
+    private static final Set<String> SUPPORTED_FORMATS = Set.of("png", "jpg", "jpeg", "bmp", "gif");
+
     public static ColorImage loadColor(String path) throws IOException {
         BufferedImage input = ImageIO.read(new File(path));
         if (input == null) {
@@ -71,5 +75,14 @@ public class ImageUtils {
             return "png";
         }
         return path.substring(dot + 1).toLowerCase(Locale.ROOT);
+    }
+
+    public static boolean isSupportedImage(Path path) {
+        String fileName = path.getFileName().toString();
+        int dot = fileName.lastIndexOf('.');
+        if (dot == -1 || dot == fileName.length() - 1) {
+            return false;
+        }
+        return SUPPORTED_FORMATS.contains(fileName.substring(dot + 1).toLowerCase(Locale.ROOT));
     }
 }

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500">
+  <rect width="1000" height="500" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700">Влияние размера очереди</text>
+  <text x="500" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#555">Фильтр gaussian5, 4 рабочих, 12 повторов на сценарий</text>
+  <line x1="90" y1="380" x2="940" y2="380" stroke="#222"/>
+  <line x1="90" y1="80" x2="90" y2="380" stroke="#222"/>
+  <g font-family="Arial, sans-serif" font-size="12" fill="#555">
+    <line x1="84" y1="380" x2="940" y2="380" stroke="#ddd"/><text x="76" y="384" text-anchor="end">0</text>
+    <line x1="84" y1="289" x2="940" y2="289" stroke="#ddd"/><text x="76" y="293" text-anchor="end">500</text>
+    <line x1="84" y1="198" x2="940" y2="198" stroke="#ddd"/><text x="76" y="202" text-anchor="end">1000</text>
+    <line x1="84" y1="107" x2="940" y2="107" stroke="#ddd"/><text x="76" y="111" text-anchor="end">1500</text>
+    <text x="28" y="230" transform="rotate(-90 28 230)" text-anchor="middle">миллисекунды</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="12">
+    <rect x="150" y="75" width="66" height="305" fill="#4e79a7"/><text x="183" y="67" text-anchor="middle">1678</text><text x="183" y="404" text-anchor="middle">посл. q1</text>
+    <rect x="270" y="77" width="66" height="303" fill="#4e79a7"/><text x="303" y="69" text-anchor="middle">1664</text><text x="303" y="404" text-anchor="middle">посл. q2</text>
+    <rect x="390" y="77" width="66" height="303" fill="#4e79a7"/><text x="423" y="69" text-anchor="middle">1665</text><text x="423" y="404" text-anchor="middle">посл. q8</text>
+    <rect x="555" y="172" width="66" height="208" fill="#59a14f"/><text x="588" y="164" text-anchor="middle">1143</text><text x="588" y="404" text-anchor="middle">пар. q1</text>
+    <rect x="675" y="176" width="66" height="204" fill="#59a14f"/><text x="708" y="168" text-anchor="middle">1124</text><text x="708" y="404" text-anchor="middle">пар. q2</text>
+    <rect x="795" y="172" width="66" height="208" fill="#59a14f"/><text x="828" y="164" text-anchor="middle">1141</text><text x="828" y="404" text-anchor="middle">пар. q8</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="13">
+    <rect x="330" y="452" width="16" height="16" fill="#4e79a7"/><text x="353" y="465">последовательный режим, 4 рабочих</text>
+    <rect x="535" y="452" width="16" height="16" fill="#59a14f"/><text x="558" y="465">параллельный режим, 4 рабочих x 2 потока</text>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="540" viewBox="0 0 1100 540">
+  <rect width="1100" height="540" fill="#ffffff"/>
+  <text x="550" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700">Потоковая обработка: баланс рабочих и внутренних потоков</text>
+  <text x="550" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#555">Фильтр gaussian5, 4 изображения, 12 повторов на сценарий</text>
+  <line x1="88" y1="420" x2="1040" y2="420" stroke="#222"/>
+  <line x1="88" y1="80" x2="88" y2="420" stroke="#222"/>
+  <g font-family="Arial, sans-serif" font-size="12" fill="#555">
+    <line x1="82" y1="420" x2="1040" y2="420" stroke="#ddd"/><text x="74" y="424" text-anchor="end">0</text>
+    <line x1="82" y1="338" x2="1040" y2="338" stroke="#ddd"/><text x="74" y="342" text-anchor="end">500</text>
+    <line x1="82" y1="257" x2="1040" y2="257" stroke="#ddd"/><text x="74" y="261" text-anchor="end">1000</text>
+    <line x1="82" y1="175" x2="1040" y2="175" stroke="#ddd"/><text x="74" y="179" text-anchor="end">1500</text>
+    <line x1="82" y1="93" x2="1040" y2="93" stroke="#ddd"/><text x="74" y="97" text-anchor="end">2000</text>
+    <text x="26" y="250" transform="rotate(-90 26 250)" text-anchor="middle">миллисекунды</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="12">
+    <rect x="120" y="151" width="62" height="269" fill="#4e79a7"/><text x="151" y="143" text-anchor="middle">1646</text><text x="151" y="442" text-anchor="middle">посл. 1</text>
+    <rect x="230" y="155" width="62" height="265" fill="#4e79a7"/><text x="261" y="147" text-anchor="middle">1620</text><text x="261" y="442" text-anchor="middle">посл. 2</text>
+    <rect x="340" y="157" width="62" height="263" fill="#4e79a7"/><text x="371" y="149" text-anchor="middle">1609</text><text x="371" y="442" text-anchor="middle">посл. 4</text>
+    <rect x="450" y="98" width="62" height="322" fill="#4e79a7"/><text x="481" y="90" text-anchor="middle">1972</text><text x="481" y="442" text-anchor="middle">посл. 8</text>
+    <rect x="585" y="256" width="62" height="164" fill="#59a14f"/><text x="616" y="248" text-anchor="middle">1006</text><text x="616" y="442" text-anchor="middle">1x8</text>
+    <rect x="695" y="242" width="62" height="178" fill="#59a14f"/><text x="726" y="234" text-anchor="middle">1091</text><text x="726" y="442" text-anchor="middle">2x4</text>
+    <rect x="805" y="209" width="62" height="211" fill="#59a14f"/><text x="836" y="201" text-anchor="middle">1295</text><text x="836" y="442" text-anchor="middle">4x2</text>
+    <rect x="915" y="139" width="62" height="281" fill="#59a14f"/><text x="946" y="131" text-anchor="middle">1721</text><text x="946" y="442" text-anchor="middle">8x1</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="13">
+    <rect x="365" y="490" width="16" height="16" fill="#4e79a7"/><text x="388" y="503">последовательная свёртка в рабочих</text>
+    <rect x="620" y="490" width="16" height="16" fill="#59a14f"/><text x="643" y="503">параллельная свёртка внутри рабочего</text>
+  </g>
+</svg>
