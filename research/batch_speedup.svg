@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560">
+  <rect width="1100" height="560" fill="#ffffff"/>
+  <text x="550" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700">Лучшее ускорение по фильтрам</text>
+  <text x="550" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#555">Сравнение лучшего параллельного сценария с одним последовательным рабочим</text>
+  <line x1="95" y1="430" x2="1035" y2="430" stroke="#222"/>
+  <line x1="95" y1="80" x2="95" y2="430" stroke="#222"/>
+  <g font-family="Arial, sans-serif" font-size="12" fill="#555">
+    <line x1="89" y1="430" x2="1035" y2="430" stroke="#ddd"/><text x="80" y="434" text-anchor="end">0x</text>
+    <line x1="89" y1="342" x2="1035" y2="342" stroke="#ddd"/><text x="80" y="346" text-anchor="end">1x</text>
+    <line x1="89" y1="255" x2="1035" y2="255" stroke="#ddd"/><text x="80" y="259" text-anchor="end">2x</text>
+    <line x1="89" y1="168" x2="1035" y2="168" stroke="#ddd"/><text x="80" y="172" text-anchor="end">3x</text>
+    <line x1="89" y1="80" x2="1035" y2="80" stroke="#ddd"/><text x="80" y="84" text-anchor="end">4x</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="13">
+    <rect x="145" y="288" width="90" height="142" fill="#59a14f"/><text x="190" y="280" text-anchor="middle">1.57x</text><text x="190" y="455" text-anchor="middle">gaussian3</text>
+    <rect x="360" y="285" width="90" height="145" fill="#59a14f"/><text x="405" y="277" text-anchor="middle">1.64x</text><text x="405" y="455" text-anchor="middle">gaussian5</text>
+    <rect x="575" y="181" width="90" height="249" fill="#59a14f"/><text x="620" y="173" text-anchor="middle">2.84x</text><text x="620" y="455" text-anchor="middle">motion9</text>
+    <rect x="790" y="124" width="90" height="306" fill="#59a14f"/><text x="835" y="116" text-anchor="middle">3.43x</text><text x="835" y="455" text-anchor="middle">median5</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="12" fill="#555">
+    <text x="550" y="505" text-anchor="middle">Для всех четырёх фильтров лучший сценарий: 1 рабочий и 8 внутренних потоков, стратегия grid</text>
+  </g>
+</svg>
