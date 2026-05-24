@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820">
+<rect width="1200" height="820" fill="#ffffff"/>
+<text x="40" y="42" font-family="Arial" font-size="24" font-weight="700" fill="#222">Grid strategy: average time by image and thread count</text>
+<text x="80" y="68" font-family="Arial" font-size="18" font-weight="700" fill="#222">256.png</text>
+<line x1="80" y1="320" x2="520" y2="320" stroke="#333"/>
+<line x1="80" y1="90" x2="80" y2="320" stroke="#333"/>
+<line x1="80" y1="90" x2="80" y2="320" stroke="#ddd"/>
+<text x="80" y="338" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">1</text>
+<line x1="226.667" y1="90" x2="226.667" y2="320" stroke="#ddd"/>
+<text x="226.667" y="338" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">2</text>
+<line x1="373.333" y1="90" x2="373.333" y2="320" stroke="#ddd"/>
+<text x="373.333" y="338" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">4</text>
+<line x1="520" y1="90" x2="520" y2="320" stroke="#ddd"/>
+<text x="520" y="338" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">8</text>
+<line x1="80" y1="320" x2="520" y2="320" stroke="#eee"/>
+<text x="72" y="324" text-anchor="end" font-family="Arial" font-size="12" fill="#666">0</text>
+<line x1="80" y1="205" x2="520" y2="205" stroke="#eee"/>
+<text x="72" y="209" text-anchor="end" font-family="Arial" font-size="12" fill="#666">41.48</text>
+<line x1="80" y1="90" x2="520" y2="90" stroke="#eee"/>
+<text x="72" y="94" text-anchor="end" font-family="Arial" font-size="12" fill="#666">82.96</text>
+<path d="M 80 281.319 L 226.667 280.795 L 373.333 270.08 L 520 282.578" fill="none" stroke="#2f80ed" stroke-width="2.5"/>
+<circle cx="80" cy="281.319" r="3.5" fill="#2f80ed"/>
+<circle cx="226.667" cy="280.795" r="3.5" fill="#2f80ed"/>
+<circle cx="373.333" cy="270.08" r="3.5" fill="#2f80ed"/>
+<circle cx="520" cy="282.578" r="3.5" fill="#2f80ed"/>
+<path d="M 80 244.415 L 226.667 264.776 L 373.333 259.541 L 520 260.074" fill="none" stroke="#27ae60" stroke-width="2.5"/>
+<circle cx="80" cy="244.415" r="3.5" fill="#27ae60"/>
+<circle cx="226.667" cy="264.776" r="3.5" fill="#27ae60"/>
+<circle cx="373.333" cy="259.541" r="3.5" fill="#27ae60"/>
+<circle cx="520" cy="260.074" r="3.5" fill="#27ae60"/>
+<path d="M 80 125.891 L 226.667 201.814 L 373.333 218.479 L 520 228.998" fill="none" stroke="#f2994a" stroke-width="2.5"/>
+<circle cx="80" cy="125.891" r="3.5" fill="#f2994a"/>
+<circle cx="226.667" cy="201.814" r="3.5" fill="#f2994a"/>
+<circle cx="373.333" cy="218.479" r="3.5" fill="#f2994a"/>
+<circle cx="520" cy="228.998" r="3.5" fill="#f2994a"/>
+<path d="M 80 114.643 L 226.667 146.199 L 373.333 182.041 L 520 204.697" fill="none" stroke="#9b51e0" stroke-width="2.5"/>
+<circle cx="80" cy="114.643" r="3.5" fill="#9b51e0"/>
+<circle cx="226.667" cy="146.199" r="3.5" fill="#9b51e0"/>
+<circle cx="373.333" cy="182.041" r="3.5" fill="#9b51e0"/>
+<circle cx="520" cy="204.697" r="3.5" fill="#9b51e0"/>
+<text x="485" y="358" font-family="Arial" font-size="12" fill="#555">threads</text>
+<text x="28" y="108" transform="rotate(-90 28 108)" font-family="Arial" font-size="12" fill="#555">ms</text>
+<text x="650" y="68" font-family="Arial" font-size="18" font-weight="700" fill="#222">512.jpg</text>
+<line x1="650" y1="320" x2="1090" y2="320" stroke="#333"/>
+<line x1="650" y1="90" x2="650" y2="320" stroke="#333"/>
+<line x1="650" y1="90" x2="650" y2="320" stroke="#ddd"/>
+<text x="650" y="338" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">1</text>
+<line x1="796.667" y1="90" x2="796.667" y2="320" stroke="#ddd"/>
+<text x="796.667" y="338" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">2</text>
+<line x1="943.333" y1="90" x2="943.333" y2="320" stroke="#ddd"/>
+<text x="943.333" y="338" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">4</text>
+<line x1="1090" y1="90" x2="1090" y2="320" stroke="#ddd"/>
+<text x="1090" y="338" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">8</text>
+<line x1="650" y1="320" x2="1090" y2="320" stroke="#eee"/>
+<text x="642" y="324" text-anchor="end" font-family="Arial" font-size="12" fill="#666">0</text>
+<line x1="650" y1="205" x2="1090" y2="205" stroke="#eee"/>
+<text x="642" y="209" text-anchor="end" font-family="Arial" font-size="12" fill="#666">140.213</text>
+<line x1="650" y1="90" x2="1090" y2="90" stroke="#eee"/>
+<text x="642" y="94" text-anchor="end" font-family="Arial" font-size="12" fill="#666">280.426</text>
+<path d="M 650 279.987 L 796.667 261.761 L 943.333 299.085 L 1090 298.571" fill="none" stroke="#2f80ed" stroke-width="2.5"/>
+<circle cx="650" cy="279.987" r="3.5" fill="#2f80ed"/>
+<circle cx="796.667" cy="261.761" r="3.5" fill="#2f80ed"/>
+<circle cx="943.333" cy="299.085" r="3.5" fill="#2f80ed"/>
+<circle cx="1090" cy="298.571" r="3.5" fill="#2f80ed"/>
+<path d="M 650 247.408 L 796.667 272.719 L 943.333 284.279 L 1090 291.44" fill="none" stroke="#27ae60" stroke-width="2.5"/>
+<circle cx="650" cy="247.408" r="3.5" fill="#27ae60"/>
+<circle cx="796.667" cy="272.719" r="3.5" fill="#27ae60"/>
+<circle cx="943.333" cy="284.279" r="3.5" fill="#27ae60"/>
+<circle cx="1090" cy="291.44" r="3.5" fill="#27ae60"/>
+<path d="M 650 119.568 L 796.667 207.744 L 943.333 244.189 L 1090 257.319" fill="none" stroke="#f2994a" stroke-width="2.5"/>
+<circle cx="650" cy="119.568" r="3.5" fill="#f2994a"/>
+<circle cx="796.667" cy="207.744" r="3.5" fill="#f2994a"/>
+<circle cx="943.333" cy="244.189" r="3.5" fill="#f2994a"/>
+<circle cx="1090" cy="257.319" r="3.5" fill="#f2994a"/>
+<path d="M 650 114.643 L 796.667 189.288 L 943.333 234.796 L 1090 247.186" fill="none" stroke="#9b51e0" stroke-width="2.5"/>
+<circle cx="650" cy="114.643" r="3.5" fill="#9b51e0"/>
+<circle cx="796.667" cy="189.288" r="3.5" fill="#9b51e0"/>
+<circle cx="943.333" cy="234.796" r="3.5" fill="#9b51e0"/>
+<circle cx="1090" cy="247.186" r="3.5" fill="#9b51e0"/>
+<text x="1055" y="358" font-family="Arial" font-size="12" fill="#555">threads</text>
+<text x="598" y="108" transform="rotate(-90 598 108)" font-family="Arial" font-size="12" fill="#555">ms</text>
+<text x="80" y="408" font-family="Arial" font-size="18" font-weight="700" fill="#222">1024.jpg</text>
+<line x1="80" y1="660" x2="520" y2="660" stroke="#333"/>
+<line x1="80" y1="430" x2="80" y2="660" stroke="#333"/>
+<line x1="80" y1="430" x2="80" y2="660" stroke="#ddd"/>
+<text x="80" y="678" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">1</text>
+<line x1="226.667" y1="430" x2="226.667" y2="660" stroke="#ddd"/>
+<text x="226.667" y="678" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">2</text>
+<line x1="373.333" y1="430" x2="373.333" y2="660" stroke="#ddd"/>
+<text x="373.333" y="678" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">4</text>
+<line x1="520" y1="430" x2="520" y2="660" stroke="#ddd"/>
+<text x="520" y="678" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">8</text>
+<line x1="80" y1="660" x2="520" y2="660" stroke="#eee"/>
+<text x="72" y="664" text-anchor="end" font-family="Arial" font-size="12" fill="#666">0</text>
+<line x1="80" y1="545" x2="520" y2="545" stroke="#eee"/>
+<text x="72" y="549" text-anchor="end" font-family="Arial" font-size="12" fill="#666">553.276</text>
+<line x1="80" y1="430" x2="520" y2="430" stroke="#eee"/>
+<text x="72" y="434" text-anchor="end" font-family="Arial" font-size="12" fill="#666">1106.552</text>
+<path d="M 80 627.133 L 226.667 637.627 L 373.333 643.516 L 520 646.097" fill="none" stroke="#2f80ed" stroke-width="2.5"/>
+<circle cx="80" cy="627.133" r="3.5" fill="#2f80ed"/>
+<circle cx="226.667" cy="637.627" r="3.5" fill="#2f80ed"/>
+<circle cx="373.333" cy="643.516" r="3.5" fill="#2f80ed"/>
+<circle cx="520" cy="646.097" r="3.5" fill="#2f80ed"/>
+<path d="M 80 590.313 L 226.667 617.549 L 373.333 631.07 L 520 639.582" fill="none" stroke="#27ae60" stroke-width="2.5"/>
+<circle cx="80" cy="590.313" r="3.5" fill="#27ae60"/>
+<circle cx="226.667" cy="617.549" r="3.5" fill="#27ae60"/>
+<circle cx="373.333" cy="631.07" r="3.5" fill="#27ae60"/>
+<circle cx="520" cy="639.582" r="3.5" fill="#27ae60"/>
+<path d="M 80 456.449 L 226.667 542.099 L 373.333 589.191 L 520 603.014" fill="none" stroke="#f2994a" stroke-width="2.5"/>
+<circle cx="80" cy="456.449" r="3.5" fill="#f2994a"/>
+<circle cx="226.667" cy="542.099" r="3.5" fill="#f2994a"/>
+<circle cx="373.333" cy="589.191" r="3.5" fill="#f2994a"/>
+<circle cx="520" cy="603.014" r="3.5" fill="#f2994a"/>
+<path d="M 80 454.643 L 226.667 537.596 L 373.333 593.428 L 520 610.142" fill="none" stroke="#9b51e0" stroke-width="2.5"/>
+<circle cx="80" cy="454.643" r="3.5" fill="#9b51e0"/>
+<circle cx="226.667" cy="537.596" r="3.5" fill="#9b51e0"/>
+<circle cx="373.333" cy="593.428" r="3.5" fill="#9b51e0"/>
+<circle cx="520" cy="610.142" r="3.5" fill="#9b51e0"/>
+<text x="485" y="698" font-family="Arial" font-size="12" fill="#555">threads</text>
+<text x="28" y="448" transform="rotate(-90 28 448)" font-family="Arial" font-size="12" fill="#555">ms</text>
+<text x="650" y="408" font-family="Arial" font-size="18" font-weight="700" fill="#222">2048.jpg</text>
+<line x1="650" y1="660" x2="1090" y2="660" stroke="#333"/>
+<line x1="650" y1="430" x2="650" y2="660" stroke="#333"/>
+<line x1="650" y1="430" x2="650" y2="660" stroke="#ddd"/>
+<text x="650" y="678" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">1</text>
+<line x1="796.667" y1="430" x2="796.667" y2="660" stroke="#ddd"/>
+<text x="796.667" y="678" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">2</text>
+<line x1="943.333" y1="430" x2="943.333" y2="660" stroke="#ddd"/>
+<text x="943.333" y="678" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">4</text>
+<line x1="1090" y1="430" x2="1090" y2="660" stroke="#ddd"/>
+<text x="1090" y="678" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">8</text>
+<line x1="650" y1="660" x2="1090" y2="660" stroke="#eee"/>
+<text x="642" y="664" text-anchor="end" font-family="Arial" font-size="12" fill="#666">0</text>
+<line x1="650" y1="545" x2="1090" y2="545" stroke="#eee"/>
+<text x="642" y="549" text-anchor="end" font-family="Arial" font-size="12" fill="#666">2633.572</text>
+<line x1="650" y1="430" x2="1090" y2="430" stroke="#eee"/>
+<text x="642" y="434" text-anchor="end" font-family="Arial" font-size="12" fill="#666">5267.145</text>
+<path d="M 650 623.385 L 796.667 640.14 L 943.333 646.592 L 1090 651.407" fill="none" stroke="#2f80ed" stroke-width="2.5"/>
+<circle cx="650" cy="623.385" r="3.5" fill="#2f80ed"/>
+<circle cx="796.667" cy="640.14" r="3.5" fill="#2f80ed"/>
+<circle cx="943.333" cy="646.592" r="3.5" fill="#2f80ed"/>
+<circle cx="1090" cy="651.407" r="3.5" fill="#2f80ed"/>
+<path d="M 650 578.184 L 796.667 619.706 L 943.333 628.846 L 1090 635.036" fill="none" stroke="#27ae60" stroke-width="2.5"/>
+<circle cx="650" cy="578.184" r="3.5" fill="#27ae60"/>
+<circle cx="796.667" cy="619.706" r="3.5" fill="#27ae60"/>
+<circle cx="943.333" cy="628.846" r="3.5" fill="#27ae60"/>
+<circle cx="1090" cy="635.036" r="3.5" fill="#27ae60"/>
+<path d="M 650 464.157 L 796.667 559.588 L 943.333 591.011 L 1090 601.17" fill="none" stroke="#f2994a" stroke-width="2.5"/>
+<circle cx="650" cy="464.157" r="3.5" fill="#f2994a"/>
+<circle cx="796.667" cy="559.588" r="3.5" fill="#f2994a"/>
+<circle cx="943.333" cy="591.011" r="3.5" fill="#f2994a"/>
+<circle cx="1090" cy="601.17" r="3.5" fill="#f2994a"/>
+<path d="M 650 454.643 L 796.667 556.269 L 943.333 584.316 L 1090 609.387" fill="none" stroke="#9b51e0" stroke-width="2.5"/>
+<circle cx="650" cy="454.643" r="3.5" fill="#9b51e0"/>
+<circle cx="796.667" cy="556.269" r="3.5" fill="#9b51e0"/>
+<circle cx="943.333" cy="584.316" r="3.5" fill="#9b51e0"/>
+<circle cx="1090" cy="609.387" r="3.5" fill="#9b51e0"/>
+<text x="1055" y="698" font-family="Arial" font-size="12" fill="#555">threads</text>
+<text x="598" y="448" transform="rotate(-90 598 448)" font-family="Arial" font-size="12" fill="#555">ms</text>
+<line x1="760" y1="40" x2="788" y2="40" stroke="#2f80ed" stroke-width="3"/><text x="796" y="44" font-family="Arial" font-size="13" fill="#333">gaussian3</text>
+<line x1="760" y1="62" x2="788" y2="62" stroke="#27ae60" stroke-width="3"/><text x="796" y="66" font-family="Arial" font-size="13" fill="#333">gaussian5</text>
+<line x1="760" y1="84" x2="788" y2="84" stroke="#f2994a" stroke-width="3"/><text x="796" y="88" font-family="Arial" font-size="13" fill="#333">motion9</text>
+<line x1="760" y1="106" x2="788" y2="106" stroke="#9b51e0" stroke-width="3"/><text x="796" y="110" font-family="Arial" font-size="13" fill="#333">median5</text>
+</svg>

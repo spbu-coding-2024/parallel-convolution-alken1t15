@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+<rect width="900" height="520" fill="#ffffff"/>
+<text x="40" y="42" font-family="Arial" font-size="24" font-weight="700" fill="#222">2048.jpg, grid strategy: speedup vs 1 thread</text>
+<line x1="85" y1="420" x2="785" y2="420" stroke="#333"/>
+<line x1="85" y1="80" x2="85" y2="420" stroke="#333"/>
+<line x1="85" y1="80" x2="85" y2="420" stroke="#ddd"/>
+<text x="85" y="442" text-anchor="middle" font-family="Arial" font-size="13" fill="#444">1</text>
+<line x1="318.333" y1="80" x2="318.333" y2="420" stroke="#ddd"/>
+<text x="318.333" y="442" text-anchor="middle" font-family="Arial" font-size="13" fill="#444">2</text>
+<line x1="551.667" y1="80" x2="551.667" y2="420" stroke="#ddd"/>
+<text x="551.667" y="442" text-anchor="middle" font-family="Arial" font-size="13" fill="#444">4</text>
+<line x1="785" y1="80" x2="785" y2="420" stroke="#ddd"/>
+<text x="785" y="442" text-anchor="middle" font-family="Arial" font-size="13" fill="#444">8</text>
+<line x1="85" y1="420" x2="785" y2="420" stroke="#eee"/>
+<text x="77" y="424" text-anchor="end" font-family="Arial" font-size="12" fill="#666">0x</text>
+<line x1="85" y1="335" x2="785" y2="335" stroke="#eee"/>
+<text x="77" y="339" text-anchor="end" font-family="Arial" font-size="12" fill="#666">1.193x</text>
+<line x1="85" y1="250" x2="785" y2="250" stroke="#eee"/>
+<text x="77" y="254" text-anchor="end" font-family="Arial" font-size="12" fill="#666">2.386x</text>
+<line x1="85" y1="165" x2="785" y2="165" stroke="#eee"/>
+<text x="77" y="169" text-anchor="end" font-family="Arial" font-size="12" fill="#666">3.579x</text>
+<line x1="85" y1="80" x2="785" y2="80" stroke="#eee"/>
+<text x="77" y="84" text-anchor="end" font-family="Arial" font-size="12" fill="#666">4.772x</text>
+<path d="M 85 348.756 L 318.333 288.649 L 551.667 225.437 L 785 116.429" fill="none" stroke="#2f80ed" stroke-width="3"/>
+<circle cx="85" cy="348.756" r="4" fill="#2f80ed"/>
+<circle cx="318.333" cy="288.649" r="4" fill="#2f80ed"/>
+<circle cx="551.667" cy="225.437" r="4" fill="#2f80ed"/>
+<circle cx="785" cy="116.429" r="4" fill="#2f80ed"/>
+<path d="M 85 348.756 L 318.333 275.34 L 551.667 232.9 L 785 186.505" fill="none" stroke="#27ae60" stroke-width="3"/>
+<circle cx="85" cy="348.756" r="4" fill="#27ae60"/>
+<circle cx="318.333" cy="275.34" r="4" fill="#27ae60"/>
+<circle cx="551.667" cy="232.9" r="4" fill="#27ae60"/>
+<circle cx="785" cy="186.505" r="4" fill="#27ae60"/>
+<path d="M 85 348.756 L 318.333 281.044 L 551.667 217.754 L 785 182.829" fill="none" stroke="#f2994a" stroke-width="3"/>
+<circle cx="85" cy="348.756" r="4" fill="#f2994a"/>
+<circle cx="318.333" cy="281.044" r="4" fill="#f2994a"/>
+<circle cx="551.667" cy="217.754" r="4" fill="#f2994a"/>
+<circle cx="785" cy="182.829" r="4" fill="#f2994a"/>
+<path d="M 85 348.756 L 318.333 278.957 L 551.667 226.69 L 785 130.935" fill="none" stroke="#9b51e0" stroke-width="3"/>
+<circle cx="85" cy="348.756" r="4" fill="#9b51e0"/>
+<circle cx="318.333" cy="278.957" r="4" fill="#9b51e0"/>
+<circle cx="551.667" cy="226.69" r="4" fill="#9b51e0"/>
+<circle cx="785" cy="130.935" r="4" fill="#9b51e0"/>
+<line x1="805" y1="92" x2="835" y2="92" stroke="#2f80ed" stroke-width="3"/><text x="842" y="96" font-family="Arial" font-size="13" fill="#333">gaussian3</text>
+<line x1="805" y1="116" x2="835" y2="116" stroke="#27ae60" stroke-width="3"/><text x="842" y="120" font-family="Arial" font-size="13" fill="#333">gaussian5</text>
+<line x1="805" y1="140" x2="835" y2="140" stroke="#f2994a" stroke-width="3"/><text x="842" y="144" font-family="Arial" font-size="13" fill="#333">motion9</text>
+<line x1="805" y1="164" x2="835" y2="164" stroke="#9b51e0" stroke-width="3"/><text x="842" y="168" font-family="Arial" font-size="13" fill="#333">median5</text>
+<text x="735" y="465" font-family="Arial" font-size="13" fill="#555">threads</text>
+</svg>
