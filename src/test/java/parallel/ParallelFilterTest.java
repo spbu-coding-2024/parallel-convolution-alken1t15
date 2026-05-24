@@ -48,6 +48,51 @@ public class ParallelFilterTest {
         }
     }
 
+    @Test
+    void parallelConvolutionShouldMatchSequentialForDifferentInputsAndThreadCounts() {
+        int[][] sizes = {{1, 1}, {2, 5}, {7, 3}, {16, 11}, {25, 19}};
+        String[] filters = {"identity", "gaussian3", "gaussian5", "motion9", "sharpen3"};
+        int[] threadCounts = {1, 2, 4, 8, 32};
+
+        for (int sizeIndex = 0; sizeIndex < sizes.length; sizeIndex++) {
+            ColorImage input = randomImage(sizes[sizeIndex][0], sizes[sizeIndex][1], 5000 + sizeIndex);
+
+            for (String filterName : filters) {
+                Kernel kernel = Kernels.byName(filterName);
+                ColorImage expected = Convolution.apply(input, kernel);
+
+                for (ParallelStrategy strategy : ParallelStrategy.values()) {
+                    for (int threads : threadCounts) {
+                        ColorImage actual = ParallelConvolution.apply(input, kernel, strategy, threads);
+                        assertImagesEqual(expected, actual);
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    void parallelMedianShouldMatchSequentialForDifferentInputsAndThreadCounts() {
+        int[][] sizes = {{1, 1}, {2, 5}, {7, 3}, {16, 11}, {25, 19}};
+        int[] windows = {3, 5, 7};
+        int[] threadCounts = {1, 2, 4, 8, 32};
+
+        for (int sizeIndex = 0; sizeIndex < sizes.length; sizeIndex++) {
+            ColorImage input = randomImage(sizes[sizeIndex][0], sizes[sizeIndex][1], 6000 + sizeIndex);
+
+            for (int window : windows) {
+                ColorImage expected = MedianFilter.apply(input, window);
+
+                for (ParallelStrategy strategy : ParallelStrategy.values()) {
+                    for (int threads : threadCounts) {
+                        ColorImage actual = ParallelMedianFilter.apply(input, window, strategy, threads);
+                        assertImagesEqual(expected, actual);
+                    }
+                }
+            }
+        }
+    }
+
     private static ColorImage randomImage(int width, int height, long seed) {
         Random random = new Random(seed);
         byte[] data = new byte[width * height * ColorImage.CHANNELS];

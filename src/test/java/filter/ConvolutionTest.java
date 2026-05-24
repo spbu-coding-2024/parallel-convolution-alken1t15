@@ -116,6 +116,52 @@ public class ConvolutionTest {
         assertImagesEqual(out1, out2);
     }
 
+    @Test
+    void convolutionShouldWrapPixelsAcrossImageBorder() {
+        ColorImage input = new ColorImage(
+                3, 1,
+                new byte[]{
+                        10, 11, 12,
+                        20, 21, 22,
+                        30, 31, 32
+                }
+        );
+        Kernel shiftRight = shiftRightKernel();
+
+        ColorImage output = Convolution.apply(input, shiftRight);
+
+        assertArrayEquals(
+                new byte[]{
+                        30, 31, 32,
+                        10, 11, 12,
+                        20, 21, 22
+                },
+                output.data
+        );
+    }
+
+    @Test
+    void oppositeShiftFiltersShouldComposeToIdentityForDifferentSizes() {
+        int[][] sizes = {{1, 1}, {2, 3}, {7, 5}, {16, 11}, {31, 24}};
+
+        for (int i = 0; i < sizes.length; i++) {
+            ColorImage input = randomImage(sizes[i][0], sizes[i][1], 4000 + i);
+
+            ColorImage shifted = Convolution.apply(input, shiftRightKernel());
+            ColorImage restored = Convolution.apply(shifted, shiftLeftKernel());
+
+            assertImagesEqual(input, restored);
+        }
+    }
+
+    private static Kernel shiftRightKernel() {
+        return new Kernel(3, 1, new double[]{1, 0, 0}, 1.0, 0.0);
+    }
+
+    private static Kernel shiftLeftKernel() {
+        return new Kernel(3, 1, new double[]{0, 0, 1}, 1.0, 0.0);
+    }
+
     private static ColorImage randomImage(int width, int height, long seed) {
         Random random = new Random(seed);
         byte[] data = new byte[width * height * ColorImage.CHANNELS];
