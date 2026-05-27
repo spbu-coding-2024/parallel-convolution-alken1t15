@@ -11,6 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ConvolutionTest {
 
+    /**
+     * Проверяет, что фильтр identity не изменяет изображение.
+     * После применения фильтра результат должен полностью совпадать
+     * с исходным изображением.
+     */
     @Test
     void identityShouldReturnSameImage() {
         ColorImage input = randomImage(17, 13, 42);
@@ -20,6 +25,11 @@ public class ConvolutionTest {
         assertImagesEqual(input, output);
     }
 
+    /**
+     * Проверяет, что ядро, состоящее только из нулей,
+     * превращает изображение в полностью чёрное.
+     * Все значения пикселей после обработки должны быть равны 0.
+     */
     @Test
     void zeroKernelShouldProduceBlackImage() {
         ColorImage input = randomImage(9, 7, 123);
@@ -32,6 +42,11 @@ public class ConvolutionTest {
         }
     }
 
+    /**
+     * Проверяет, что после применения свёртки изображение сохраняет исходные размеры.
+     * Также проверяется, что длина массива RGB-данных соответствует ширине,
+     * высоте и количеству цветовых каналов.
+     */
     @Test
     void outputShouldKeepSameSizeAndRgbDataLength() {
         ColorImage input = randomImage(31, 19, 7);
@@ -43,6 +58,11 @@ public class ConvolutionTest {
         assertEquals(input.width * input.height * ColorImage.CHANNELS, output.data.length);
     }
 
+    /**
+     * Проверяет, что значения пикселей после применения разных фильтров
+     * остаются в допустимом диапазоне от 0 до 255.
+     * Это важно, потому что цветовой канал не должен выходить за границы byte/RGB-значения.
+     */
     @Test
     void outputValuesShouldStayInRange0To255() {
         ColorImage input = randomImage(25, 25, 99);
@@ -58,6 +78,10 @@ public class ConvolutionTest {
         }
     }
 
+    /**
+     * Проверяет, что фильтры обрабатывают RGB-каналы независимо друг от друга.
+     * Значения красного, зелёного и синего каналов не должны смешиваться между собой.
+     */
     @Test
     void filtersShouldProcessRgbChannelsIndependently() {
         ColorImage input = new ColorImage(1, 1, new byte[]{10, 80, (byte) 200});
@@ -67,6 +91,11 @@ public class ConvolutionTest {
         assertArrayEquals(new byte[]{10, 80, (byte) 200}, output.data);
     }
 
+    /**
+     * Проверяет, что медианный фильтр не изменяет изображение,
+     * если все пиксели в нём имеют одинаковый цвет.
+     * Для постоянного изображения результат должен совпадать с исходным.
+     */
     @Test
     void medianOnConstantImageShouldReturnSameImage() {
         ColorImage input = constantImage(11, 8, 30, 120, 220);
@@ -78,6 +107,12 @@ public class ConvolutionTest {
         assertImagesEqual(input, output5);
     }
 
+    /**
+     * Проверяет, что медианный фильтр удаляет одиночный импульсный шум
+     * в каждом RGB-канале.
+     * Центральный испорченный пиксель должен быть заменён нормальным значением
+     * из окружающей области.
+     */
     @Test
     void medianShouldRemoveSingleImpulseNoisePerChannel() {
         ColorImage input = constantImage(7, 7, 100, 110, 120);
@@ -94,6 +129,11 @@ public class ConvolutionTest {
         assertEquals(120, output.data[outCenter + 2] & 0xFF);
     }
 
+    /**
+     * Проверяет, что расширение ядра нулями не меняет результат свёртки.
+     * Ядро gaussian3 и эквивалентное ядро 5x5 с нулями по краям
+     * должны давать одинаковый результат.
+     */
     @Test
     void paddingKernelWithZerosShouldNotChangeResult() {
         ColorImage input = randomImage(16, 12, 2024);
@@ -116,6 +156,11 @@ public class ConvolutionTest {
         assertImagesEqual(out1, out2);
     }
 
+    /**
+     * Проверяет, что два противоположных сдвига подряд возвращают изображение
+     * в исходное состояние.
+     * Тест выполняется для разных размеров изображений, включая маленькие случаи.
+     */
     @Test
     void oppositeShiftFiltersShouldComposeToIdentityAcrossImageSizes() {
         Kernel shiftLeft = new Kernel(
@@ -149,6 +194,12 @@ public class ConvolutionTest {
         }
     }
 
+    /**
+     * Проверяет случайные усредняющие ядра разных размеров.
+     * После применения таких ядер изображение должно сохранять исходные размеры,
+     * корректную длину массива RGB-данных, а значения пикселей должны оставаться
+     * в диапазоне от 0 до 255.
+     */
     @Test
     void randomLinearKernelsShouldKeepSizeAndRangeAcrossManyDimensions() {
         Random random = new Random(7007);

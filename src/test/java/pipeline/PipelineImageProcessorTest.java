@@ -20,6 +20,10 @@ public class PipelineImageProcessorTest {
     @TempDir
     Path tempDir;
 
+    /**
+     * Проверяет, что последовательный pipeline корректно обрабатывает несколько изображений
+     * и выдаёт такой же результат, как обычное последовательное применение фильтра напрямую.
+     */
     @Test
     void sequentialPipelineShouldMatchSingleImageSequentialReference() throws IOException {
         Path input = tempDir.resolve("input");
@@ -44,6 +48,10 @@ public class PipelineImageProcessorTest {
         assertImagesEqual(ImageFilters.apply(imageB, "gaussian5"), ImageUtils.loadColor(output.resolve("b.png").toString()));
     }
 
+    /**
+     * Проверяет, что параллельный pipeline сохраняет структуру вложенных папок
+     * и результат обработки совпадает с эталонным последовательным применением фильтра.
+     */
     @Test
     void parallelPipelineShouldPreserveRelativeDirectoriesAndMatchReference() throws IOException {
         Path input = tempDir.resolve("input");
@@ -67,6 +75,10 @@ public class PipelineImageProcessorTest {
         assertImagesEqual(ImageFilters.apply(image, "sharpen3"), ImageUtils.loadColor(outputImage.toString()));
     }
 
+    /**
+     * Проверяет, что pipeline игнорирует неподдерживаемые файлы
+     * и корректно работает с директорией, в которой нет изображений для обработки.
+     */
     @Test
     void pipelineShouldIgnoreUnsupportedFilesAndProcessEmptyDirectories() throws IOException {
         Path input = tempDir.resolve("input");
@@ -86,6 +98,13 @@ public class PipelineImageProcessorTest {
         assertFalse(Files.exists(output.resolve("notes.txt")));
     }
 
+    /**
+     * Проверяет pipeline на нескольких фильтрах, разных размерах очереди
+     * и разных режимах обработки.
+     *
+     * Для каждого фильтра результат должен совпадать с эталонным результатом,
+     * полученным через обычное применение фильтра к каждому изображению отдельно.
+     */
     @Test
     void pipelineShouldMatchReferenceForSeveralFiltersAndQueueSizes() throws IOException {
         Path input = tempDir.resolve("input-many");

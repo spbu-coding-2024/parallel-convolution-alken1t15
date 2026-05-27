@@ -13,6 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParallelFilterTest {
+
+    /**
+     * Проверяет, что параллельная свёртка изображения даёт такой же результат,
+     * как и обычная последовательная свёртка, для всех доступных стратегий распараллеливания.
+     */
     @Test
     void parallelConvolutionShouldMatchSequentialForAllStrategies() {
         ColorImage input = randomImage(23, 17, 1001);
@@ -25,6 +30,10 @@ public class ParallelFilterTest {
         }
     }
 
+    /**
+     * Проверяет, что параллельный медианный фильтр даёт такой же результат,
+     * как и последовательный медианный фильтр, для всех доступных стратегий распараллеливания.
+     */
     @Test
     void parallelMedianShouldMatchSequentialForAllStrategies() {
         ColorImage input = randomImage(19, 21, 2002);
@@ -36,6 +45,11 @@ public class ParallelFilterTest {
         }
     }
 
+    /**
+     * Проверяет, что параллельная свёртка работает корректно даже тогда,
+     * когда количество потоков больше, чем количество частей изображения,
+     * которые реально можно эффективно распределить между потоками.
+     */
     @Test
     void parallelConvolutionShouldWorkWhenThreadsMoreThanImageParts() {
         ColorImage input = randomImage(5, 4, 3003);
@@ -48,6 +62,14 @@ public class ParallelFilterTest {
         }
     }
 
+    /**
+     * Проверяет параллельную свёртку на разных размерах изображений,
+     * разных ядрах фильтров, разных стратегиях распараллеливания
+     * и разном количестве потоков.
+     *
+     * Во всех случаях результат параллельной обработки должен полностью совпадать
+     * с результатом последовательной обработки.
+     */
     @Test
     void parallelConvolutionShouldMatchSequentialAcrossRandomSizesAndKernels() {
         String[] filters = {"identity", "blur3", "gaussian5", "motion9", "edge_all3", "emboss5", "mean3"};
@@ -75,6 +97,14 @@ public class ParallelFilterTest {
         }
     }
 
+    /**
+     * Проверяет параллельный медианный фильтр на разных размерах изображений,
+     * разных размерах окна фильтра, разных стратегиях распараллеливания
+     * и разном количестве потоков.
+     *
+     * Во всех случаях параллельный медианный фильтр должен выдавать тот же результат,
+     * что и последовательная реализация.
+     */
     @Test
     void parallelMedianShouldMatchSequentialAcrossRandomSizesAndWindows() {
         int[][] sizes = {
