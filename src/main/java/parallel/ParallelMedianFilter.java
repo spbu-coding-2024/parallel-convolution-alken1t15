@@ -14,6 +14,7 @@ public class ParallelMedianFilter {
         int height = src.height;
         int radius = windowSize / 2;
         byte[] dst = new byte[src.data.length];
+        // Создаем для каждого потока свой window
         ThreadLocal<int[]> windows = ThreadLocal.withInitial(() -> new int[windowSize * windowSize]);
 
         ParallelImageProcessor.process(width, height, strategy, threads, (x, y) -> {

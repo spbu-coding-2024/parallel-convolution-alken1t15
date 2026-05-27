@@ -11,6 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ConvolutionTest {
 
+    /**
+     * Проверяет, что фильтр identity не изменяет изображение.
+     * После применения фильтра результат должен полностью совпадать
+     * с исходным изображением.
+     */
     @Test
     void identityShouldReturnSameImage() {
         ColorImage input = randomImage(17, 13, 42);
@@ -20,6 +25,11 @@ public class ConvolutionTest {
         assertImagesEqual(input, output);
     }
 
+    /**
+     * Проверяет, что ядро, состоящее только из нулей,
+     * превращает изображение в полностью чёрное.
+     * Все значения RGB-каналов после обработки должны быть равны 0.
+     */
     @Test
     void zeroKernelShouldProduceBlackImage() {
         ColorImage input = randomImage(9, 7, 123);
@@ -32,6 +42,11 @@ public class ConvolutionTest {
         }
     }
 
+    /**
+     * Проверяет, что после применения свёртки изображение сохраняет исходные размеры.
+     * Также проверяется, что длина массива RGB-данных соответствует ширине,
+     * высоте и количеству цветовых каналов.
+     */
     @Test
     void outputShouldKeepSameSizeAndRgbDataLength() {
         ColorImage input = randomImage(31, 19, 7);
@@ -43,6 +58,11 @@ public class ConvolutionTest {
         assertEquals(input.width * input.height * ColorImage.CHANNELS, output.data.length);
     }
 
+    /**
+     * Проверяет, что после применения разных фильтров значения пикселей
+     * остаются в допустимом диапазоне от 0 до 255.
+     * Это важно, чтобы после свёртки RGB-значения не выходили за границы цвета.
+     */
     @Test
     void outputValuesShouldStayInRange0To255() {
         ColorImage input = randomImage(25, 25, 99);
@@ -58,6 +78,10 @@ public class ConvolutionTest {
         }
     }
 
+    /**
+     * Проверяет, что RGB-каналы обрабатываются независимо друг от друга.
+     * Значения красного, зелёного и синего каналов не должны смешиваться.
+     */
     @Test
     void filtersShouldProcessRgbChannelsIndependently() {
         ColorImage input = new ColorImage(1, 1, new byte[]{10, 80, (byte) 200});
@@ -67,6 +91,11 @@ public class ConvolutionTest {
         assertArrayEquals(new byte[]{10, 80, (byte) 200}, output.data);
     }
 
+    /**
+     * Проверяет, что медианный фильтр не изменяет постоянное изображение.
+     * Если все пиксели имеют один и тот же цвет, результат должен совпадать
+     * с исходным изображением для разных размеров окна фильтра.
+     */
     @Test
     void medianOnConstantImageShouldReturnSameImage() {
         ColorImage input = constantImage(11, 8, 30, 120, 220);
@@ -78,6 +107,12 @@ public class ConvolutionTest {
         assertImagesEqual(input, output5);
     }
 
+    /**
+     * Проверяет, что медианный фильтр удаляет одиночный импульсный шум
+     * отдельно в каждом RGB-канале.
+     * Испорченный центральный пиксель должен замениться нормальным значением
+     * из окружающей области.
+     */
     @Test
     void medianShouldRemoveSingleImpulseNoisePerChannel() {
         ColorImage input = constantImage(7, 7, 100, 110, 120);
@@ -94,6 +129,11 @@ public class ConvolutionTest {
         assertEquals(120, output.data[outCenter + 2] & 0xFF);
     }
 
+    /**
+     * Проверяет, что расширение ядра нулями не меняет результат свёртки.
+     * Ядро gaussian3 и эквивалентное ядро 5x5 с нулевыми краями
+     * должны давать одинаковый результат.
+     */
     @Test
     void paddingKernelWithZerosShouldNotChangeResult() {
         ColorImage input = randomImage(16, 12, 2024);
@@ -116,6 +156,11 @@ public class ConvolutionTest {
         assertImagesEqual(out1, out2);
     }
 
+    /**
+     * Проверяет, что свёртка корректно обрабатывает границы изображения
+     * с циклическим переходом через край.
+     * При сдвиге пикселей вправо крайний пиксель должен перейти в начало строки.
+     */
     @Test
     void convolutionShouldWrapPixelsAcrossImageBorder() {
         ColorImage input = new ColorImage(
@@ -140,6 +185,11 @@ public class ConvolutionTest {
         );
     }
 
+    /**
+     * Проверяет, что два противоположных сдвига подряд возвращают изображение
+     * в исходное состояние.
+     * Тест выполняется для разных размеров изображений.
+     */
     @Test
     void oppositeShiftFiltersShouldComposeToIdentityForDifferentSizes() {
         int[][] sizes = {{1, 1}, {2, 3}, {7, 5}, {16, 11}, {31, 24}};
