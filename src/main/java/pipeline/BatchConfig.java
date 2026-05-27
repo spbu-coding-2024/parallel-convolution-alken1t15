@@ -25,6 +25,8 @@ public record BatchConfig(
         int convolutionThreads
 ) {
     public BatchConfig {
+        // Worker'ы должны существовать, а ArrayBlockingQueue не допускает
+        // нулевую вместимость, поэтому оба параметра проверяются сразу.
         if (convolutionWorkers <= 0) {
             throw new IllegalArgumentException("Convolution worker count must be positive");
         }
@@ -37,6 +39,8 @@ public record BatchConfig(
         if (strategy == null) {
             strategy = ParallelStrategy.GRID;
         }
+        // В sequential-режиме внутренние потоки не используются; фиксированное
+        // значение упрощает вывод параметров и сравнение результатов benchmark.
         if (!parallelConvolution) {
             convolutionThreads = 1;
         }

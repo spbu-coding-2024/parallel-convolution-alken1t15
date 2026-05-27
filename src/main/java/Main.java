@@ -197,6 +197,8 @@ public class Main {
             BatchConfig config,
             int iterations
     ) throws IOException {
+        // В отличие от benchmark одного изображения, здесь каждый прогон включает
+        // весь pipeline: чтение файлов, фильтрацию и сохранение результата.
         PipelineImageProcessor processor = new PipelineImageProcessor();
         long total = 0;
         int files = 0;

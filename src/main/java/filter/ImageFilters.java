@@ -9,6 +9,8 @@ import java.util.Locale;
 
 public class ImageFilters {
     public static ColorImage apply(ColorImage input, String filterName) {
+        // Median filter не является свёрткой с фиксированным ядром, поэтому
+        // выбираю его отдельно; остальные имена передаются в таблицу ядер.
         String name = filterName.toLowerCase(Locale.ROOT);
         if (name.startsWith("median")) {
             return MedianFilter.apply(input, parseMedianWindowSize(name));
@@ -23,6 +25,8 @@ public class ImageFilters {
             ParallelStrategy strategy,
             int threads
     ) {
+        // Разбор имени совпадает с последовательным методом, чтобы pipeline
+        // мог менять режим выполнения, не меняя смысл выбранного фильтра.
         String name = filterName.toLowerCase(Locale.ROOT);
         if (name.startsWith("median")) {
             return ParallelMedianFilter.apply(input, parseMedianWindowSize(name), strategy, threads);

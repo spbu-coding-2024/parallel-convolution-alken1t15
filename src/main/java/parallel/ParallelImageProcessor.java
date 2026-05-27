@@ -10,6 +10,8 @@ public class ParallelImageProcessor {
             throw new IllegalArgumentException("Thread count must be positive");
         }
 
+        // Нет смысла создавать больше рабочих потоков, чем пикселей:
+        // каждому активному потоку должен достаться хотя бы один пиксель.
         int workerCount = Math.min(threads, width * height);
 
         switch (strategy) {
@@ -67,6 +69,8 @@ public class ParallelImageProcessor {
     }
 
     private static void processGrid(int width, int height, int workerCount, PixelWriter writer) {
+        // Подбираю почти квадратную сетку. На узких изображениях часть блоков
+        // может оказаться пустой, зато все реальные пиксели покрываются один раз.
         int gridRows = (int) Math.floor(Math.sqrt(workerCount));
         int gridColumns = (int) Math.ceil((double) workerCount / gridRows);
         int blockCount = gridRows * gridColumns;
