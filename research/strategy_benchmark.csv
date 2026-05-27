@@ -1,0 +1,17 @@
+image,size,filter,strategy,threads,avg_ms,throughput_mpix_s
+2048.jpg,2048x2048,gaussian5,pixels,1,1522.257,2.755
+2048.jpg,2048x2048,gaussian5,pixels,2,867.941,4.832
+2048.jpg,2048x2048,gaussian5,pixels,4,618.262,6.784
+2048.jpg,2048x2048,gaussian5,pixels,8,426.717,9.829
+2048.jpg,2048x2048,gaussian5,rows,1,1407.786,2.979
+2048.jpg,2048x2048,gaussian5,rows,2,865.59,4.846
+2048.jpg,2048x2048,gaussian5,rows,4,540.636,7.758
+2048.jpg,2048x2048,gaussian5,rows,8,406.503,10.318
+2048.jpg,2048x2048,gaussian5,columns,1,1420.443,2.953
+2048.jpg,2048x2048,gaussian5,columns,2,833.31,5.033
+2048.jpg,2048x2048,gaussian5,columns,4,514.156,8.158
+2048.jpg,2048x2048,gaussian5,columns,8,662.849,6.328
+2048.jpg,2048x2048,gaussian5,grid,1,1473.906,2.846
+2048.jpg,2048x2048,gaussian5,grid,2,926.891,4.525
+2048.jpg,2048x2048,gaussian5,grid,4,536.194,7.822
+2048.jpg,2048x2048,gaussian5,grid,8,355.93,11.784
