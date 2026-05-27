@@ -166,13 +166,27 @@ public class Main {
             String filterName,
             BatchConfig config
     ) throws IOException {
+
+        // Создаём объект процессора, который отвечает за обработку изображений.
+        // Он будет запускать pipeline batch-обработки для всей папки.
         PipelineImageProcessor processor = new PipelineImageProcessor();
+
+        // Запускаем обработку всех изображений из входной директории.
+        // inputDirectory — папка, откуда берём исходные изображения.
+        // outputDirectory — папка, куда сохраняем обработанные изображения.
+        // filterName — название фильтра, который нужно применить.
+        // config — настройки batch-обработки: количество потоков, размер очереди,
+        // режим последовательной или параллельной обработки.
         BatchResult result = processor.processDirectory(
                 Path.of(inputDirectory),
                 Path.of(outputDirectory),
                 filterName,
                 config
         );
+
+        // Выводим результат обработки в консоль:
+        // статус выполнения, название фильтра, использованную конфигурацию
+        // и статистику batch-обработки.
         printBatchResult("Done", filterName, config, result);
     }
 
@@ -207,67 +221,204 @@ public class Main {
     }
 
     private static BatchConfig parseBatchConfig(String[] args, int offset) {
+        // Считываем количество рабочих потоков из массива аргументов.
+        // offset указывает, с какой позиции начинаются параметры batch-режима.
         int workers = Integer.parseInt(args[offset]);
+
+        // Считываем вместимость очереди задач.
+        // Очередь используется для передачи задач между частями программы.
         int queueCapacity = Integer.parseInt(args[offset + 1]);
+
+        // Считываем режим выполнения batch-обработки:
+        // sequential — последовательная обработка,
+        // parallel — параллельная обработка.
+        // toLowerCase(Locale.ROOT) нужен, чтобы режим корректно распознавался
+        // независимо от регистра букв.
         String mode = args[offset + 2].toLowerCase(Locale.ROOT);
 
+        // В зависимости от выбранного режима создаём соответствующую конфигурацию.
         return switch (mode) {
+
+            // Если выбран sequential-режим, создаём конфигурацию
+            // с последовательной обработкой изображений.
             case "sequential" -> BatchConfig.sequentialWorkers(workers, queueCapacity);
+
+            // Если выбран parallel-режим, дополнительно нужно считать:
+            // стратегию параллельной обработки и количество потоков для свёртки.
             case "parallel" -> {
+
+                // Проверяем, что пользователь передал все обязательные параметры.
+                // Для parallel-режима после mode должны быть ещё:
+                // strategy и convolutionThreads.
                 if (args.length < offset + 5) {
-                    throw new IllegalArgumentException("Parallel batch mode requires strategy and convolutionThreads");
+                    throw new IllegalArgumentException(
+                            "Parallel batch mode requires strategy and convolutionThreads"
+                    );
                 }
+
+                // Создаём конфигурацию параллельной batch-обработки.
                 yield BatchConfig.parallelWorkers(
-                        workers,
-                        queueCapacity,
-                        ParallelStrategy.parse(args[offset + 3]),
-                        Integer.parseInt(args[offset + 4])
+                        workers,                         // количество рабочих потоков
+                        queueCapacity,                   // размер очереди задач
+                        ParallelStrategy.parse(args[offset + 3]), // стратегия распараллеливания
+                        Integer.parseInt(args[offset + 4])         // число потоков для свёртки
                 );
             }
+
+            // Если пользователь передал неизвестный режим,
+            // выбрасываем ошибку с пояснением.
             default -> throw new IllegalArgumentException("Unknown batch mode: " + mode);
         };
     }
 
     private static void printDone(String filterName, ColorImage input, long elapsed) {
+        // Выводим в консоль информацию о завершении обработки одного изображения.
+        // Locale.US используется, чтобы дробные числа выводились через точку,
+        // например 15.324, а не 15,324.
         System.out.printf(Locale.US,
                 "Done. Filter=%s, size=%dx%d, time=%.3f ms, throughput=%.3f MPix/s%n",
-                filterName, input.width, input.height, elapsed / 1_000_000.0, throughput(input, elapsed));
+
+                // Название применённого фильтра.
+                filterName,
+
+                // Ширина изображения.
+                input.width,
+
+                // Высота изображения.
+                input.height,
+
+                // Время обработки изображения.
+                // elapsed хранится в наносекундах, поэтому делим на 1_000_000.0,
+                // чтобы получить миллисекунды.
+                elapsed / 1_000_000.0,
+
+                // Производительность обработки изображения:
+                // сколько мегапикселей обрабатывается за секунду.
+                throughput(input, elapsed)
+        );
     }
 
-    private static void printAverage(String filterName, ColorImage input, int iterations, long total, int checksum) {
+    private static void printAverage(
+            String filterName,
+            ColorImage input,
+            int iterations,
+            long total,
+            int checksum
+    ) {
+        // Считаем среднее время одной обработки изображения.
+        // total — суммарное время всех запусков в наносекундах.
+        // Делим его на количество итераций, чтобы получить среднее время одного запуска.
         double avgNs = (double) total / iterations;
+
+        // Выводим в консоль средние результаты benchmark-теста.
+        // Locale.US нужен, чтобы дробные числа выводились через точку.
         System.out.printf(Locale.US,
                 "Average: filter=%s, image=%dx%d, iterations=%d, avg=%.3f ms, throughput=%.3f MPix/s, checksum=%d%n",
-                filterName, input.width, input.height, iterations, avgNs / 1_000_000.0,
-                throughput(input, (long) avgNs), checksum);
+
+                // Название фильтра, который тестировался.
+                filterName,
+
+                // Ширина изображения.
+                input.width,
+
+                // Высота изображения.
+                input.height,
+
+                // Количество запусков benchmark-теста.
+                iterations,
+
+                // Среднее время одной обработки в миллисекундах.
+                avgNs / 1_000_000.0,
+
+                // Производительность обработки в мегапикселях в секунду.
+                throughput(input, (long) avgNs),
+
+                // Контрольная сумма результата.
+                // Она нужна, чтобы убедиться, что вычисления реально выполнялись
+                // и результат обработки не был оптимизирован или потерян.
+                checksum
+        );
     }
 
     private static double throughput(ColorImage input, long elapsedNs) {
+        // Считаем количество пикселей изображения в мегапикселях.
+        // input.width * input.height даёт общее количество пикселей,
+        // а деление на 1_000_000.0 переводит это значение в мегапиксели.
         double mpix = (double) input.width * input.height / 1_000_000.0;
+
+        // Считаем производительность обработки.
+        // elapsedNs — время обработки в наносекундах.
+        // Делим его на 1_000_000_000.0, чтобы получить время в секундах.
+        // Итоговая формула:
+        // мегапиксели / секунды = мегапикселей в секунду.
         return mpix / (elapsedNs / 1_000_000_000.0);
     }
 
-    private static void printBatchResult(String prefix, String filterName, BatchConfig config, BatchResult result) {
+    private static void printBatchResult(
+            String prefix,
+            String filterName,
+            BatchConfig config,
+            BatchResult result
+    ) {
+        // Выводим в консоль итоговую статистику batch-обработки.
+        // Locale.US используется, чтобы дробные числа выводились через точку,
+        // например 12.345, а не 12,345.
         System.out.printf(Locale.US,
                 "%s. Filter=%s, files=%d, workers=%d, queue=%d, mode=%s, total=%.3f ms, read=%.3f ms, convolution=%.3f ms, write=%.3f ms, avg=%.3f ms/file%n",
+
+                // Текстовый префикс сообщения, например "Done" или "Benchmark".
                 prefix,
+
+                // Название применённого фильтра.
                 filterName,
+
+                // Количество успешно обработанных файлов.
                 result.files(),
+
+                // Количество worker-потоков, которые обрабатывали изображения.
                 config.convolutionWorkers(),
+
+                // Размер очереди между этапами pipeline.
                 config.queueCapacity(),
+
+                // Режим обработки: sequential или parallel.
                 batchMode(config),
+
+                // Общее время всей batch-обработки в миллисекундах.
                 result.totalMillis(),
+
+                // Время, потраченное на чтение изображений, переводим из наносекунд в миллисекунды.
                 result.readNanos() / 1_000_000.0,
+
+                // Время, потраченное на применение фильтра, переводим из наносекунд в миллисекунды.
                 result.convolutionNanos() / 1_000_000.0,
+
+                // Время, потраченное на сохранение изображений, переводим из наносекунд в миллисекунды.
                 result.writeNanos() / 1_000_000.0,
-                result.averageMillisPerFile());
+
+                // Среднее время обработки одного файла.
+                result.averageMillisPerFile()
+        );
     }
 
     private static String batchMode(BatchConfig config) {
+        // Если параллельная свёртка отключена,
+        // значит batch-обработка работает в последовательном режиме.
         if (!config.parallelConvolution()) {
             return "sequential";
         }
-        return "parallel/" + config.strategy().name().toLowerCase(Locale.ROOT) + "/" + config.convolutionThreads();
+
+        // Если параллельная свёртка включена,
+        // формируем строку с подробным описанием режима:
+        // parallel / название стратегии / количество потоков для свёртки.
+        //
+        // Например:
+        // parallel/rows/4
+        // parallel/grid/8
+        return "parallel/"
+                + config.strategy().name().toLowerCase(Locale.ROOT)
+                + "/"
+                + config.convolutionThreads();
     }
 
     private static void printUsage() {
