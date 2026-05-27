@@ -14,11 +14,13 @@ public class ParallelMedianFilter {
         int height = src.height;
         int radius = windowSize / 2;
         byte[] dst = new byte[src.data.length];
-        // Создаем для каждого потока свой window
+        // При вычислении медианы массив window сортируется. Поэтому храню
+        // отдельный временный массив для каждого потока через ThreadLocal.
         ThreadLocal<int[]> windows = ThreadLocal.withInitial(() -> new int[windowSize * windowSize]);
 
         ParallelImageProcessor.process(width, height, strategy, threads, (x, y) -> {
-            // Каждому потоку даю своё окно, чтобы потоки не перетирали данные друг друга.
+            // Использую общий последовательный расчёт одного пикселя:
+            // так правило обработки границ остаётся одинаковым в обеих версиях.
             int[] window = windows.get();
             int index = ColorImage.offset(width, x, y);
             for (int channel = 0; channel < ColorImage.CHANNELS; channel++) {

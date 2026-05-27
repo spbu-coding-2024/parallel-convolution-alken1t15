@@ -9,9 +9,12 @@ public class ParallelImageProcessor {
         if (threads <= 0) {
             throw new IllegalArgumentException("Thread count must be positive");
         }
-        // Ограничение числа рабочих потоков
+        // Не создаю больше рабочих потоков, чем пикселей: лишние потоки
+        // в любом случае не получили бы работу.
         int workerCount = Math.min(threads, width * height);
 
+        // Здесь выбираю только способ обхода координат. Саму операцию
+        // над пикселем передаёт фильтр через writer.
         switch (strategy) {
             case PIXELS -> processPixels(width, height, workerCount, writer);
             case ROWS -> processRows(width, height, Math.min(workerCount, height), writer);
@@ -33,7 +36,7 @@ public class ParallelImageProcessor {
                     return;
                 }
 
-                // Одномерный номер пикселя переводится в координаты
+                // Перевожу линейный индекс обратно в координаты изображения.
                 writer.write(pixel % width, pixel / width);
             }
         });
@@ -41,10 +44,9 @@ public class ParallelImageProcessor {
 
     private static void processRows(int width, int height, int workerCount, PixelWriter writer) {
         runWorkers(workerCount, workerIndex -> {
-            // Каждому потоку отдаю непрерывный диапазон строк.
-            // Это первая строка которую должен обработать поток.
+            // Каждому потоку отдаю непрерывный непересекающийся диапазон строк.
+            // Целочисленное деление распределяет остаток между диапазонами.
             int fromY = workerIndex * height / workerCount;
-            //Это граница конца диапазона.
             int toY = (workerIndex + 1) * height / workerCount;
 
             for (int y = fromY; y < toY; y++) {
@@ -57,10 +59,9 @@ public class ParallelImageProcessor {
 
     private static void processColumns(int width, int height, int workerCount, PixelWriter writer) {
         runWorkers(workerCount, workerIndex -> {
-            // В этом режиме каждому потоку отдаю свой диапазон столбцов.
-            // Это первая строка которую должен обработать поток.
+            // В этом режиме каждому потоку отдаю непересекающийся диапазон
+            // столбцов, а внутри диапазона прохожу все строки.
             int fromX = workerIndex * width / workerCount;
-            //Это граница конца диапазона.
             int toX = (workerIndex + 1) * width / workerCount;
 
             for (int y = 0; y < height; y++) {
@@ -72,24 +73,23 @@ public class ParallelImageProcessor {
     }
 
     private static void processGrid(int width, int height, int workerCount, PixelWriter writer) {
-        // Считается, на сколько строк блоков нужно разбить изображение.
+        // Подбираю почти квадратную сетку, чтобы блоки имели близкие размеры
+        // и нагрузка распределялась равномерно.
         int gridRows = (int) Math.floor(Math.sqrt(workerCount));
-        // Считается, на сколько столбцов блоков нужно разбить изображение.
         int gridColumns = (int) Math.ceil((double) workerCount / gridRows);
-        // Общее количество блоков
+        // В прямоугольной сетке блоков иногда получается немного больше,
+        // чем было запрошено потоков, зато всё изображение покрыто блоками.
         int blockCount = gridRows * gridColumns;
 
         runWorkers(blockCount, blockIndex -> {
-            // Разбиваю картинку на прямоугольные блоки и отдаю каждому потоку свой блок.
-            // Номер строки блока;
+            // По номеру блока нахожу его позицию в сетке.
             int blockY = blockIndex / gridColumns;
-            // Номер столбца блока.
             int blockX = blockIndex % gridColumns;
 
-            // Вычисление границ блока по y
+            // Границы блоков вычисляю через пропорции, поэтому вместе
+            // блоки покрывают все пиксели без пересечений и пропусков.
             int fromY = blockY * height / gridRows;
             int toY = (blockY + 1) * height / gridRows;
-            //Вычисление границ блока по x
             int fromX = blockX * width / gridColumns;
             int toX = (blockX + 1) * width / gridColumns;
 
@@ -102,7 +102,8 @@ public class ParallelImageProcessor {
     }
 
     private static void runWorkers(int workerCount, WorkerBody body) {
-        //Здесь создаётся список куда будут складываться все созданные потоки
+        // Храню ссылки на созданные потоки, чтобы дождаться окончания
+        // всей обработки перед возвратом результата фильтра.
         List<Thread> workers = new ArrayList<>(workerCount);
 
         for (int i = 0; i < workerCount; i++) {
@@ -115,7 +116,8 @@ public class ParallelImageProcessor {
 
         for (Thread worker : workers) {
             try {
-                // Текущий поток ждёт пока worker закончит работу.
+                // Возвращаю управление вызывающему коду только после того,
+                // как каждый рабочий поток заполнил свою часть результата.
                 worker.join();
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();

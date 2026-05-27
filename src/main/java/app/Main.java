@@ -125,6 +125,8 @@ public class Main {
             int threads,
             int iterations
     ) throws IOException {
+        // В этом замере каждый запуск заново выполняет параллельный фильтр,
+        // чтобы среднее время отражало также создание и ожидание рабочих потоков.
         ColorImage input = ImageUtils.loadColor(inputPath);
         long total = 0;
         int checksum = 0;
@@ -135,6 +137,8 @@ public class Main {
             long elapsed = System.nanoTime() - start;
 
             total += elapsed;
+            // Использую байт результата, чтобы вычисленное изображение
+            // участвовало в наблюдаемом результате benchmark.
             checksum += out.data[i % out.data.length] & 0xFF;
             System.out.printf(Locale.US, "Run %d: %.3f ms%n", i + 1, elapsed / 1_000_000.0);
         }
@@ -167,6 +171,8 @@ public class Main {
     ) {
         String name = filterName.toLowerCase(Locale.ROOT);
         if (name.startsWith("median")) {
+            // Median filter также запускаю через общий механизм разбиения
+            // пикселей, но его расчёт не является свёрткой с ядром.
             return ParallelMedianFilter.apply(input, parseMedianWindowSize(name), strategy, threads);
         }
 
@@ -200,6 +206,8 @@ public class Main {
     }
 
     private static double throughput(ColorImage input, long elapsedNs) {
+        // Считаю именно обработанные пиксели, а не число RGB-каналов:
+        // один RGB-пиксель считается одной обработанной единицей.
         double mpix = (double) input.width * input.height / 1_000_000.0;
         return mpix / (elapsedNs / 1_000_000_000.0);
     }
