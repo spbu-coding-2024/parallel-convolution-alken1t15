@@ -1,10 +1,13 @@
+package filter;
+
 import java.util.Locale;
 
 public class Kernels {
-    static Kernel byName(String name) {
+    public static Kernel byName(String name) {
+        // Я храню все ядра в одном месте, чтобы CLI мог выбирать фильтр по имени.
         return switch (name.toLowerCase(Locale.ROOT)) {
 
-            // Нейтральный фильтр: оставляет изображение без изменений
+            // Для identity я оставляю изображение без изменений.
             case "identity" -> new Kernel(
                     3, 3,
                     new double[]{
@@ -15,7 +18,7 @@ public class Kernels {
                     1.0, 0.0
             );
 
-            // Простое размытие 3x3 из статьи
+            // Для простого размытия 3x3 я беру небольшое сглаживающее ядро.
             case "blur3" -> new Kernel(
                     3, 3,
                     new double[]{
@@ -26,7 +29,7 @@ public class Kernels {
                     1.0, 0.0
             );
 
-            // Более сильное размытие 5x5
+            // Для более сильного размытия я использую ядро 5x5.
             case "blur5" -> new Kernel(
                     5, 5,
                     new double[]{
@@ -39,7 +42,7 @@ public class Kernels {
                     1.0 / 13.0, 0.0
             );
 
-            // Приближённый гауссов фильтр 3x3
+            // Для gaussian3 я использую приближённое гауссово ядро 3x3.
             case "gaussian3" -> new Kernel(
                     3, 3,
                     new double[]{
@@ -50,7 +53,7 @@ public class Kernels {
                     1.0 / 16.0, 0.0
             );
 
-            // Приближённый гауссов фильтр 5x5
+            // Для gaussian5 я использую приближённое гауссово ядро 5x5.
             case "gaussian5" -> new Kernel(
                     5, 5,
                     new double[]{
@@ -63,7 +66,7 @@ public class Kernels {
                     1.0 / 256.0, 0.0
             );
 
-            // Более точный вариант gaussian 3x3 с коэффициентами
+            // Для gaussian3_exact я беру более точные коэффициенты 3x3.
             case "gaussian3_exact" -> new Kernel(
                     3, 3,
                     new double[]{
@@ -74,7 +77,7 @@ public class Kernels {
                     1.0, 0.0
             );
 
-            // motion blur по диагонали 9x9
+            // Для motion blur я размазываю изображение по диагонали 9x9.
             case "motion9" -> new Kernel(
                     9, 9,
                     new double[]{
@@ -91,7 +94,7 @@ public class Kernels {
                     1.0 / 9.0, 0.0
             );
 
-            // Выделение горизонтальных границ 5x5
+            // Этим ядром я выделяю горизонтальные границы 5x5.
             case "edge_horizontal5" -> new Kernel(
                     5, 5,
                     new double[]{
@@ -104,7 +107,7 @@ public class Kernels {
                     1.0, 0.0
             );
 
-            // Выделение вертикальных границ 5x5
+            // Этим ядром я выделяю вертикальные границы 5x5.
             case "edge_vertical5" -> new Kernel(
                     5, 5,
                     new double[]{
@@ -117,7 +120,7 @@ public class Kernels {
                     1.0, 0.0
             );
 
-            // Выделение границ под углом 45 градусов 5x5
+            // Этим ядром я выделяю границы под углом 45 градусов 5x5.
             case "edge_45deg5" -> new Kernel(
                     5, 5,
                     new double[]{
@@ -130,7 +133,7 @@ public class Kernels {
                     1.0, 0.0
             );
 
-            // фильтр поиска границ во всех направлениях
+            // Этим фильтром я ищу границы во всех направлениях.
             case "edge_all3" -> new Kernel(
                     3, 3,
                     new double[]{
@@ -141,7 +144,7 @@ public class Kernels {
                     1.0, 0.0
             );
 
-            // Повышение резкости 3x3
+            // Этим ядром я повышаю резкость 3x3.
             case "sharpen3" -> new Kernel(
                     3, 3,
                     new double[]{
@@ -152,7 +155,7 @@ public class Kernels {
                     1.0, 0.0
             );
 
-            // Более мягкий вариант sharpen 5x5
+            // Для sharpen5 я беру более мягкий вариант 5x5.
             case "sharpen5" -> new Kernel(
                     5, 5,
                     new double[]{
@@ -165,7 +168,7 @@ public class Kernels {
                     1.0 / 8.0, 0.0
             );
 
-            // Фильтр, усиливающий перепады яркости
+            // Этим фильтром я усиливаю перепады яркости.
             case "edge_excessive3" -> new Kernel(
                     3, 3,
                     new double[]{
@@ -176,7 +179,7 @@ public class Kernels {
                     1.0, 0.0
             );
 
-            // Эффект тиснения
+            // Этим ядром я делаю эффект тиснения.
             case "emboss3" -> new Kernel(
                     3, 3,
                     new double[]{
@@ -187,7 +190,7 @@ public class Kernels {
                     1.0, 128.0
             );
 
-            // Более сильный emboss 5x5
+            // Для emboss5 я беру более сильный вариант 5x5.
             case "emboss5" -> new Kernel(
                     5, 5,
                     new double[]{
@@ -200,7 +203,7 @@ public class Kernels {
                     1.0, 128.0
             );
 
-            // Обычный усредняющий фильтр
+            // Для mean3 я использую обычный усредняющий фильтр.
             case "mean3" -> new Kernel(
                     3, 3,
                     new double[]{
